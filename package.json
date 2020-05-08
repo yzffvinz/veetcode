@@ -1,6 +1,6 @@
 {
   "name": "veetcode",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "wenzhe的leetcode题目记录",
   "main": "index.js",
   "scripts": {
