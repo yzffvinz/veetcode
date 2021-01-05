@@ -1,3 +1,56 @@
+class GraphNode {
+    constructor(value, preList = []) {
+        this.value = value;
+        this.preList = preList;
+    }
+
+    equals(value) {
+        return this.value === value;
+    }
+
+    routine() {
+        return [...this.preList, this.value]
+    }
+
+    born(value) {
+        return new GraphNode(value, this.routine());
+    }
+
+    logRoutine() {
+        return this.routine().join(' -> ');
+    }
+}
+
+function searchWithRoutine(map, start, final, type) {
+    let searched = [];
+    let beSearched = [];
+    if (!map || !map[start] || !map[start].length) {
+        return;
+    }
+
+    beSearched.push(new GraphNode(start));
+    while (beSearched.length) {
+        let head;
+        if (type === 'dfs') {       // 深度优先
+            head = beSearched.pop()
+        } else {                    // 广度优先
+            head = beSearched.shift();
+        }
+        searched.push(head.value);
+        if (head.equals(final)) {
+            return head;
+        } else {
+            map[head.value].forEach(item => {
+                if (!searched.includes(item)) {
+                    beSearched.push(head.born(item));
+                    searched.push(item);
+                }
+            });
+        }
+    }
+    return 'not found';
+}
+
 function search(map, start, final, type) {
     let searched = [];
     let beSearched = [];
@@ -5,9 +58,8 @@ function search(map, start, final, type) {
         return;
     }
 
-    beSearched.push(...map[start]);
+    beSearched.push(start);
     while (beSearched.length) {
-        console.log(beSearched);
         let head;
         if (type === 'dfs') {       // 深度优先
             head = beSearched.pop()
@@ -39,6 +91,6 @@ const map = {
 };
 
 console.log('dfs');
-console.log(search(map, 's', 'f', 'dfs'));
+console.log(searchWithRoutine(map, 's', 'f', 'dfs').logRoutine());
 console.log('bfs');
-console.log(search(map, 's', 'f', 'bfs'));
+console.log(searchWithRoutine(map, 's', 'f', 'bfs').logRoutine());
