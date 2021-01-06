@@ -8,20 +8,20 @@ class GraphNode {
         return this.value === value;
     }
 
-    routine() {
+    route() {
         return [...this.preList, this.value]
     }
 
     born(value) {
-        return new GraphNode(value, this.routine());
+        return new GraphNode(value, this.route());
     }
 
-    logRoutine() {
-        return this.routine().join(' -> ');
+    logRoute() {
+        return this.route().join(' -> ');
     }
 }
 
-function searchWithRoutine(map, start, final, type) {
+function searchWithRoute(map, start, final, type) {
     let searched = [];
     let beSearched = [];
     if (!map || !map[start] || !map[start].length) {
@@ -91,6 +91,6 @@ const map = {
 };
 
 console.log('dfs');
-console.log(searchWithRoutine(map, 's', 'f', 'dfs').logRoutine());
+console.log(searchWithRoute(map, 's', 'f', 'dfs').logRoute());
 console.log('bfs');
-console.log(searchWithRoutine(map, 's', 'f', 'bfs').logRoutine());
+console.log(searchWithRoute(map, 's', 'f', 'bfs').logRoute());
