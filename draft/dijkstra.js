@@ -44,12 +44,27 @@ function dijkstraCost(map, from, to) {
                 const newCost = map[head][key] + costs[head];
                 if (!costs.hasOwnProperty(key) || newCost < costs[key]) {
                     costs[key] = newCost;
+                    costs[key + '_f'] = head;
                     addrs.push(key);
                 }
             }
         });
     }
+
+    const route = [];
+    let temp = to;
+    route.unshift(temp);
+    
+    while (costs[temp + '_f']) {
+        route.unshift(costs[temp + '_f']);
+        temp = costs[temp + '_f'];
+    }
+
+    console.log(`FROM ${from} TO ${to}`);
+    console.log('cost: ', costs[to]);
+    console.log(`route: `, route.join(' -> '));
+    
     return costs;
 }
 
-console.log(dijkstraCost(map, 'sheet', 'piano'));
+dijkstraCost(map, 'sheet', 'piano');
