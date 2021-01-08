@@ -6,7 +6,8 @@ const map = {
     },
     record: {
         guita: 15,
-        drum: 20
+        drum: 20,
+        poster: -7
     },
     poster: {
         guita: 30,
@@ -42,7 +43,7 @@ function dijkstraCost(map, from, to) {
         keys.length && keys.forEach(key => {
             if (map[key]) {
                 const newCost = map[head][key] + costs[head];
-                if (!costs.hasOwnProperty(key) || newCost < costs[key]) {
+                if (!costs.hasOwnProperty(key) || newCost < costs[key]) { // 仅作是否处理过为迪克斯特拉，加消耗是否更判断贝尔曼福德
                     costs[key] = newCost;
                     costs[key + '_f'] = head;
                     addrs.push(key);
@@ -67,4 +68,5 @@ function dijkstraCost(map, from, to) {
     return costs;
 }
 
-dijkstraCost(map, 'sheet', 'piano');
+const costs = dijkstraCost(map, 'sheet', 'piano');
+console.log(costs);
