@@ -36,15 +36,11 @@ function findMinStations(provs, bagMap) {
         let theBag = null;
         let cover = 0;
         Object.keys(bagMap).forEach(bag => {
-            if (bagList.includes(bag)) {
-                return;
-            } else {
-                const left = subtraction(provs, Array.from(bagList));
-                const inte = intersection(left, bagMap[bag]);
-                if (inte.length > cover) {
-                    theBag = bag;
-                    cover = inte.length;
-                }
+            const left = subtraction(provs, Array.from(provSet));
+            const inte = intersection(left, bagMap[bag]);
+            if (inte.length > cover) {
+                theBag = bag;
+                cover = inte.length;
             }
         });
 
