@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/yzffvinz/veetcode#readme",
   "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/eslint-plugin": "^7.16.5",
+    "@ecomfe/eslint-config": "^7.4.0",
     "cz-conventional-changelog": "^3.2.0",
+    "eslint": "^8.10.0",
     "ghooks": "^2.0.4",
     "validate-commit-msg": "^2.14.0"
   },
