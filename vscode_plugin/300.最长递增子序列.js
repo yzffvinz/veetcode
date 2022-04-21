@@ -21,5 +21,21 @@ var lengthOfLIS = function(nums) {
     }
     return Math.max(...dp) || 0
 };
+// 2022-04-21 19:57:58
+var lengthOfLIS = function(nums) {
+    const dp = [1];
+    let max = 1;
+    for (let i = 1; i < nums.length; i++) {
+        let curMax = 1;
+        for (let j = 0; j < i; j++) {
+            if (nums[i] > nums[j]) {
+                curMax = Math.max(dp[j] + 1, curMax);
+            }
+        }
+        dp[i] = curMax;
+        max = Math.max(curMax, max);
+    }
+    return max;
+};
 // @lc code=end
 
