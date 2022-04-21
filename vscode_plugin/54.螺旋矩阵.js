@@ -51,27 +51,26 @@
  */
 var spiralOrder = function(matrix) {
     if (!matrix || !matrix.length || !matrix[0].length) return [];
-    const rst = [];
-    let [top, bottom, left, right] = [0, matrix.length - 1, 0, matrix[0].length - 1];
-
+    let rst = [];
+    let [top, right, bottom, left] = [0, matrix[0].length - 1, matrix.length - 1, 0];
     while (top <= bottom && left <= right) {
-        for (let j = left; j <= right; j++) {
-            rst.push(matrix[top][j]);
+        for (let i = left; i <= right; i++) {
+            rst.push(matrix[top][i]);
         }
         for (let i = top + 1; i <= bottom; i++) {
             rst.push(matrix[i][right]);
         }
         if (top < bottom && left < right) {
-            for (let j = right - 1; j >= left; j--) {
-                rst.push(matrix[bottom][j]);
+            for (let i = right - 1; i >= left; i--) {
+                rst.push(matrix[bottom][i]);
             }
             for (let i = bottom - 1; i > top; i--) {
                 rst.push(matrix[i][left]);
             }
         }
-        [top, bottom, left, right] = [top + 1, bottom - 1, left + 1, right - 1];
-    }
 
+        [top, right, bottom, left] = [top + 1, right - 1, bottom - 1, left + 1];
+    }
     return rst;
 };
 // @lc code=end
